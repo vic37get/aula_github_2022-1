@@ -20,5 +20,13 @@ public class Conta {
         saldo += valor;
     }
 
-    
+    public void transferencia(double valor, Conta destino) throws Exception {
+        if (saldo - valor < 0)
+            throw new Exception("Saldo insuficente para realizar operação");
+        else {
+            saldo = -valor;
+            destino.deposito(valor);
+        }
+
+    }
 }
