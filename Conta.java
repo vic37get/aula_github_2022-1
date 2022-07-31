@@ -1,5 +1,5 @@
 public class Conta {
-    
+
     protected int numeroDaConta;
     protected int agencia;
     protected double saldo;
@@ -11,5 +11,14 @@ public class Conta {
         this.saldo = 0;
         this.cliente = cliente;
     }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void deposito(double valor) {
+        saldo += valor;
+    }
+
     
 }
