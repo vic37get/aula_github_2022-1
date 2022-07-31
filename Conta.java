@@ -29,4 +29,8 @@ public class Conta {
         }
 
     }
+
+    public String mostrarCliente() {
+        return cliente.getNome();
+    }
 }
