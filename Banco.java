@@ -21,6 +21,15 @@ public class Banco {
         return null;
     }
 
+    public Conta getConta(int numeroConta, int agencia){
+        for (Conta conta: contas){
+            if (conta.getNumeroDaConta() == numeroConta && conta.getAgencia() == agencia){
+                return conta;
+            }
+        }
+        return null;
+    }
+
     public void mostrarContas() {
         for (Conta conta : contas) {
             System.out.println(conta.mostrarCliente() + "- " + conta.getSaldo() + "/n");
