@@ -4,12 +4,18 @@ public class Conta {
     protected int agencia;
     protected double saldo;
     protected Cliente cliente;
+    protected String extrato;
 
     public Conta(int numeroDaConta, int agencia, Cliente cliente) {
         this.numeroDaConta = numeroDaConta;
         this.agencia = agencia;
         this.saldo = 0;
         this.cliente = cliente;
+        this.extrato = "";
+    }
+
+    public String getExtrato(){
+        return this.extrato;
     }
 
     public int getNumeroDaConta() {
@@ -25,7 +31,8 @@ public class Conta {
     }
 
     public void deposito(double valor) {
-        saldo += valor;
+        this.saldo += valor;
+        this.extrato += "Deposito no valor de R$ "+valor+" Saldo atual: R$ "+this.saldo+"\n";
     }
 
     public void sacar(double valor) throws Exception {
@@ -34,6 +41,7 @@ public class Conta {
         }else{
             this.saldo -= valor;
             System.out.println("Saque realizado com sucesso");
+            this.extrato += "Saque no valor de R$ "+valor+" Saldo restante: R$ "+this.saldo+"\n";
         }
     }
 
@@ -43,6 +51,7 @@ public class Conta {
         else {
             saldo = -valor;
             destino.deposito(valor);
+            this.extrato += "Tranferência Enviada no valor de R$ "+valor+",para "+destino.getAgencia()+" Saldo restante: R$ "+this.saldo+"\n";
         }
 
     }
