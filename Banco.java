@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Banco {
     // public ArrayList<Cliente> clientes = new ArrayList();
@@ -9,8 +10,14 @@ public class Banco {
     // clientes.add(cliente);
     // }
 
-    public void CadastrarConta(Conta conta) {
+    public boolean CadastrarConta(Conta conta) {
+        for (Conta c : contas){
+            if(c.getNumeroDaConta() == conta.getNumeroDaConta()){
+                return false;
+            }
+        }
         contas.add(conta);
+        return true;
     }
 
     public Cliente getCliente(ArrayList<Cliente> clientes, int cpf) {
@@ -32,7 +39,7 @@ public class Banco {
 
     public void mostrarContas() {
         for (Conta conta : contas) {
-            System.out.println(conta.mostrarCliente() + "- " + conta.getSaldo() + "/n");
+            System.out.println("Cliente: "+conta.mostrarCliente() + " - Saldo: " + conta.getSaldo() + "\n");
         }
     }
 

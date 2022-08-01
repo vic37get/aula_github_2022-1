@@ -20,56 +20,64 @@ public class Menu {
 		while (op != 0) {
 			Scanner scan = new Scanner(System.in);
 			System.out.println(
-					"[1]-Cadastrar Cliente/n[2]-Cadastrar Conta Corrente/n[3]-Conta Poupança/n[4]-Mostrar Contas Cadastradas/n[5]-Sacar");
+					"[1]-Cadastrar Cliente\n[2]-Cadastrar Conta Corrente\n[3]-Conta Poupança\n[4]-Mostrar Contas Cadastradas\n[5]-Sacar\n[6]-Depositar\n[7]-Transferir\n[8]-Extrato");
 			op = scan.nextInt();
 			switch (op) {
 				case 1:// cadastrar cliente
 
 					Scanner clienteScan = new Scanner(System.in);
+					System.out.println("Nome: ");
 					String nome = clienteScan.nextLine();
-					int cpf = clienteScan.nextInt();
+					System.out.println("Sexo: ");
 					String sexo = clienteScan.nextLine();
+					System.out.println("CPF: ");
+					int cpf = clienteScan.nextInt();
+					
 					Cliente cliente = new Cliente(nome, cpf, sexo);
-					clientes.add(cliente);
-
+					boolean cad = false;
+					for (Cliente c : clientes){
+						if(c.getCpf() == cpf){
+							cad = true;
+						}
+					}
+					if(cad){
+						System.out.println("Um cliente com mesmo CPF já existe");
+					}else{
+						clientes.add(cliente);
+						System.out.println("Cliente cadastrado com sucesso");
+					}
+					
 					break;
 
 				case 2:// cadastrar conta corrente
 					Conta conta;
 					Scanner contaScan = new Scanner(System.in);
+					System.out.println("Numero da conta: ");
 					int numeroConta = contaScan.nextInt();
+					System.out.println("Agencia: ");
 					int agencia = contaScan.nextInt();
-					int i = 1;
-					for (Cliente clienteEscolhido : clientes) {
-						System.out.println(i + "-" + clienteEscolhido.getNome() + "cpf: " + clienteEscolhido.getCpf());
-					}
-
 					System.out.println("Digite o cpf do cliente escolhido");
 					int clienteEscolhido = contaScan.nextInt();
 					Cliente clienteDoBanco = banco.getCliente(clientes, clienteEscolhido);
 
 					if (clienteDoBanco != null) {
 						conta = new ContaCorrente(numeroConta, agencia, clienteDoBanco);
-						System.out.println("Conta cadastrada com sucesso");
-						banco.CadastrarConta(conta);
+						if(banco.CadastrarConta(conta)){
+							System.out.println("Conta cadastrada com sucesso");
+						}else{
+							System.out.println("Numero de conta já existente, tente novamente com um número diferente");
+						}
 					} else {
 						System.out.println("Cliente não encontrado, verifique se digitou o cpf corretamente");
 					}
-
-					// clientes.contains();
-					// Cliente cliente = new Cliente(nome,cpf,sexo);
-					// clientes.add(cliente);
 					break;
 				case 3:// cadastrar conta poupança
 					Conta contaPoupanca;
 					Scanner contaPScan = new Scanner(System.in);
+					System.out.println("Numero da conta: ");
 					int numeroContaP = contaPScan.nextInt();
+					System.out.println("Agencia: ");
 					int agenciaP = contaPScan.nextInt();
-					int numCliente = 1;
-					for (Cliente clientePEscolhido : clientes) {
-						System.out.println(
-								numCliente + "-" + clientePEscolhido.getNome() + "cpf: " + clientePEscolhido.getCpf());
-					}
 
 					System.out.println("Digite o cpf do cliente escolhido");
 					int clientePEscolhido = contaPScan.nextInt();
@@ -77,8 +85,11 @@ public class Menu {
 
 					if (clientePDoBanco != null) {
 						contaPoupanca = new ContaPoupanca(numeroContaP, agenciaP, clientePDoBanco);
-						System.out.println("Conta cadastrada com sucesso");
-						banco.CadastrarConta(contaPoupanca);
+						if(banco.CadastrarConta(contaPoupanca)){
+							System.out.println("Conta cadastrada com sucesso");
+						}else{
+							System.out.println("Numero de conta já existente, tente novamente com um número diferente");
+						}
 					} else {
 						System.out.println("Cliente não encontrado, verifique se digitou o cpf corretamente");
 					}
@@ -93,7 +104,7 @@ public class Menu {
 					int agencia5 = contaScan5.nextInt();
 					Conta contaSaque = banco.getConta(numeroConta5,agencia5);
 					if (contaSaque != null){
-						System.out.println("Conta identificada com sucesso/nDigite o valor a ser sacado:/n");
+						System.out.println("Conta identificada com sucesso\nDigite o valor a ser sacado:\n");
 						double saqueValor = contaScan5.nextDouble();
 						contaSaque.sacar(saqueValor);
 					}else{
