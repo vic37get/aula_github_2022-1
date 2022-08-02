@@ -130,6 +130,28 @@ public class Menu {
 					}
 					break;
 
+				case 7://Extrato
+					Scanner contaScan7 = new Scanner(System.in);
+					System.out.println("Numero da conta origem: ");
+					int numeroConta7 = contaScan7.nextInt();
+					System.out.println("Agencia da conta origem: ");
+					int agencia7 = contaScan7.nextInt();
+					Conta contaOrigem = banco.getConta(numeroConta7,agencia7);
+					if (contaOrigem != null){
+						System.out.println("Conta identificada com sucesso\nDigite o valor a ser trasnferido:");
+						double transferenciaValor = contaScan7.nextDouble();
+						System.out.println("Numero da conta destino: ");
+						numeroConta7 = contaScan7.nextInt();
+						System.out.println("Agencia da conta destino: ");
+						agencia7 = contaScan7.nextInt();
+						Conta contaDestino = banco.getConta(numeroConta7,agencia7);
+						if (contaDestino != null){System.out.println("Conta não encontrada");break;}
+						contaOrigem.transferencia(transferenciaValor,contaDestino);
+					}else{
+						System.out.println("Conta não encontrada");
+					}
+					break;
+
 				case 8://Extrato
 					Scanner contaScan8 = new Scanner(System.in);
 					System.out.println("Numero da conta: ");
