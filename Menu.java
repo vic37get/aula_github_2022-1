@@ -11,7 +11,7 @@ public class Menu {
 		this.options = options;
 	}
 
-	public void MenuIniciar() throws Exception{
+	public void MenuIniciar() throws Exception {
 		// this.title = title;
 		// this.options = options;
 		Banco banco = new Banco();
@@ -32,21 +32,21 @@ public class Menu {
 					String sexo = clienteScan.nextLine();
 					System.out.println("CPF: ");
 					int cpf = clienteScan.nextInt();
-					
+
 					Cliente cliente = new Cliente(nome, cpf, sexo);
 					boolean cad = false;
-					for (Cliente c : clientes){
-						if(c.getCpf() == cpf){
+					for (Cliente c : clientes) {
+						if (c.getCpf() == cpf) {
 							cad = true;
 						}
 					}
-					if(cad){
+					if (cad) {
 						System.out.println("Um cliente com mesmo CPF já existe");
-					}else{
+					} else {
 						clientes.add(cliente);
 						System.out.println("Cliente cadastrado com sucesso");
 					}
-					
+
 					break;
 
 				case 2:// cadastrar conta corrente
@@ -62,9 +62,9 @@ public class Menu {
 
 					if (clienteDoBanco != null) {
 						conta = new ContaCorrente(numeroConta, agencia, clienteDoBanco);
-						if(banco.CadastrarConta(conta)){
+						if (banco.CadastrarConta(conta)) {
 							System.out.println("Conta cadastrada com sucesso");
-						}else{
+						} else {
 							System.out.println("Numero de conta já existente, tente novamente com um número diferente");
 						}
 					} else {
@@ -85,9 +85,9 @@ public class Menu {
 
 					if (clientePDoBanco != null) {
 						contaPoupanca = new ContaPoupanca(numeroContaP, agenciaP, clientePDoBanco);
-						if(banco.CadastrarConta(contaPoupanca)){
+						if (banco.CadastrarConta(contaPoupanca)) {
 							System.out.println("Conta cadastrada com sucesso");
-						}else{
+						} else {
 							System.out.println("Numero de conta já existente, tente novamente com um número diferente");
 						}
 					} else {
@@ -97,72 +97,74 @@ public class Menu {
 				case 4:// mostrar todas as contas
 					banco.mostrarContas();
 					break;
-				
-				case 5://Sacar
+
+				case 5:// Sacar
 					Scanner contaScan5 = new Scanner(System.in);
 					System.out.println("Numero da conta: ");
 					int numeroConta5 = contaScan5.nextInt();
 					System.out.println("Agencia: ");
 					int agencia5 = contaScan5.nextInt();
-					Conta contaSaque = banco.getConta(numeroConta5,agencia5);
-					if (contaSaque != null){
+					Conta contaSaque = banco.getConta(numeroConta5, agencia5);
+					if (contaSaque != null) {
 						System.out.println("Conta identificada com sucesso\nDigite o valor a ser sacado:");
 						double saqueValor = contaScan5.nextDouble();
 						contaSaque.sacar(saqueValor);
-					}else{
+					} else {
 						System.out.println("Conta não encontrada");
 					}
 					break;
 
-				case 6://Deposito
+				case 6:// Deposito
 					Scanner contaScan6 = new Scanner(System.in);
 					System.out.println("Numero da conta: ");
 					int numeroConta6 = contaScan6.nextInt();
 					System.out.println("Agencia: ");
 					int agencia6 = contaScan6.nextInt();
-					Conta contaDeposito = banco.getConta(numeroConta6,agencia6);
-					if (contaDeposito != null){
+					Conta contaDeposito = banco.getConta(numeroConta6, agencia6);
+					if (contaDeposito != null) {
 						System.out.println("Conta identificada com sucesso\nDigite o valor a ser depositado:");
 						double depositoValor = contaScan6.nextDouble();
 						contaDeposito.deposito(depositoValor);
-					}else{
+					} else {
 						System.out.println("Conta não encontrada");
 					}
 					break;
 
-				case 7://Extrato
+				case 7:// Transferir
 					Scanner contaScan7 = new Scanner(System.in);
 					System.out.println("Numero da conta origem: ");
 					int numeroConta7 = contaScan7.nextInt();
 					System.out.println("Agencia da conta origem: ");
 					int agencia7 = contaScan7.nextInt();
-					Conta contaOrigem = banco.getConta(numeroConta7,agencia7);
-					if (contaOrigem != null){
+					Conta contaOrigem = banco.getConta(numeroConta7, agencia7);
+					if (contaOrigem != null) {
 						System.out.println("Conta identificada com sucesso\nDigite o valor a ser trasnferido:");
 						double transferenciaValor = contaScan7.nextDouble();
 						System.out.println("Numero da conta destino: ");
 						numeroConta7 = contaScan7.nextInt();
 						System.out.println("Agencia da conta destino: ");
 						agencia7 = contaScan7.nextInt();
-						Conta contaDestino = banco.getConta(numeroConta7,agencia7);
-						if (contaDestino != null){System.out.println("Conta não encontrada");break;}
-						contaOrigem.transferencia(transferenciaValor,contaDestino);
-					}else{
+						Conta contaDestino = banco.getConta(numeroConta7, agencia7);
+						if (contaDestino != null) {
+							contaOrigem.transferencia(transferenciaValor, contaDestino);
+							System.out.println("Transferencia realizada com sucesso");
+						}
+					} else {
 						System.out.println("Conta não encontrada");
 					}
 					break;
 
-				case 8://Extrato
+				case 8:// Extrato
 					Scanner contaScan8 = new Scanner(System.in);
 					System.out.println("Numero da conta: ");
 					int numeroConta8 = contaScan8.nextInt();
 					System.out.println("Agencia: ");
 					int agencia8 = contaScan8.nextInt();
-					Conta contaExtrato = banco.getConta(numeroConta8,agencia8);
-					if (contaExtrato != null){
+					Conta contaExtrato = banco.getConta(numeroConta8, agencia8);
+					if (contaExtrato != null) {
 						System.out.println("Conta identificada com sucesso\nGerando Extrato...");
 						System.out.println(contaExtrato.getExtrato());
-					}else{
+					} else {
 						System.out.println("Conta não encontrada");
 					}
 					break;

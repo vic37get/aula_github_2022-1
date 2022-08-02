@@ -14,15 +14,15 @@ public class Conta {
         this.extrato = "";
     }
 
-    public String getExtrato(){
-        return this.extrato+"\nSaldo atual: R$ "+this.getSaldo();
+    public String getExtrato() {
+        return this.extrato + "\nSaldo atual: R$ " + this.getSaldo();
     }
 
     public int getNumeroDaConta() {
         return this.numeroDaConta;
     }
 
-    public int getAgencia(){
+    public int getAgencia() {
         return this.agencia;
     }
 
@@ -32,16 +32,16 @@ public class Conta {
 
     public void deposito(double valor) {
         this.saldo += valor;
-        this.extrato += "Deposito no valor de R$ "+valor+" Saldo atual: R$ "+this.saldo+"\n";
+        this.extrato += "Deposito no valor de R$ " + valor + " Saldo atual: R$ " + this.saldo + "\n";
     }
 
     public void sacar(double valor) throws Exception {
-        if (this.saldo < valor){
+        if (this.saldo < valor) {
             throw new Exception("Saldo insuficente para realizar operação");
-        }else{
+        } else {
             this.saldo -= valor;
             System.out.println("Saque realizado com sucesso");
-            this.extrato += "Saque no valor de R$ "+valor+" Saldo restante: R$ "+this.saldo+"\n";
+            this.extrato += "Saque no valor de R$ " + valor + " Saldo restante: R$ " + this.saldo + "\n";
         }
     }
 
@@ -49,9 +49,10 @@ public class Conta {
         if (saldo - valor < 0)
             throw new Exception("Saldo insuficente para realizar operação");
         else {
-            saldo = -valor;
+            saldo -= valor;
             destino.deposito(valor);
-            this.extrato += "Tranferência Enviada no valor de R$ "+valor+",para "+destino.getAgencia()+" Saldo restante: R$ "+this.saldo+"\n";
+            this.extrato += "Tranferência Enviada no valor de R$ " + valor + ",para " + destino.getAgencia()
+                    + " Saldo restante: R$ " + this.saldo + "\n";
         }
 
     }
