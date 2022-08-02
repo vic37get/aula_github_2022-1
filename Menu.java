@@ -100,13 +100,31 @@ public class Menu {
 				
 				case 5://Sacar
 					Scanner contaScan5 = new Scanner(System.in);
+					System.out.println("Numero da conta: ");
 					int numeroConta5 = contaScan5.nextInt();
+					System.out.println("Agencia: ");
 					int agencia5 = contaScan5.nextInt();
 					Conta contaSaque = banco.getConta(numeroConta5,agencia5);
 					if (contaSaque != null){
 						System.out.println("Conta identificada com sucesso\nDigite o valor a ser sacado:\n");
 						double saqueValor = contaScan5.nextDouble();
 						contaSaque.sacar(saqueValor);
+					}else{
+						System.out.println("Conta não encontrada");
+					}
+					break;
+
+				case 6://Deposito
+					Scanner contaScan6 = new Scanner(System.in);
+					System.out.println("Numero da conta: ");
+					int numeroConta6 = contaScan6.nextInt();
+					System.out.println("Agencia: ");
+					int agencia6 = contaScan6.nextInt();
+					Conta contaDeposito = banco.getConta(numeroConta6,agencia6);
+					if (contaDeposito != null){
+						System.out.println("Conta identificada com sucesso\nDigite o valor a ser depositado:\n");
+						double depositoValor = contaScan6.nextDouble();
+						contaDeposito.deposito(depositoValor);
 					}else{
 						System.out.println("Conta não encontrada");
 					}

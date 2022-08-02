@@ -15,7 +15,7 @@ public class Conta {
     }
 
     public String getExtrato(){
-        return this.extrato;
+        return this.extrato+"\nSaldo atual: R$ "+this.getSaldo();
     }
 
     public int getNumeroDaConta() {
